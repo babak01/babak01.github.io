@@ -1,6 +1,8 @@
 import { fetch } from 'wix-fetch';
 
 $w.onReady(function () {
+  let selectedFile; // Define selectedFile at the beginning of the function
+
   $w("#fileInput").onChange((event) => {
     const file = event.target.files[0];
     console.log("File selected:", file.name); // Log the selected file name

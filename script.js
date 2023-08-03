@@ -1,9 +1,7 @@
-import { fetch } from 'wix-fetch';
+document.addEventListener("DOMContentLoaded", function() {
+  let selectedFile;
 
-$w.onReady(function () {
-  let selectedFile; // Define selectedFile at the beginning of the function
-
-  $w("#fileInput").onChange((event) => {
+  document.getElementById("fileInput").addEventListener("change", (event) => {
     const file = event.target.files[0];
     console.log("File selected:", file.name); // Log the selected file name
 
@@ -16,7 +14,7 @@ $w.onReady(function () {
     selectedFile = file;
   });
 
-  $w("#submitButton").onClick((event) => {
+  document.getElementById("submitButton").addEventListener("click", (event) => {
     if (!selectedFile) {
       console.log("Please upload a .npy file.");
       return;
@@ -27,14 +25,14 @@ $w.onReady(function () {
     let formData = new FormData();
     formData.append('file', selectedFile);
 
-    return fetch('http://172.31.83.137:5000/predict', {
+    fetch('http://172.31.83.137:5000/predict', {
       method: 'POST',
       body: formData
     })
     .then(response => response.json())
     .then(data => {
-      $w("#predictionText").text = 'Diagnosis: ' + data.diagnosis;
-      $w("#resultImage").src = 'data:image/jpeg;base64,' + data.image;
+      document.getElementById("predictionText").textContent = 'Diagnosis: ' + data.diagnosis;
+      document.getElementById("resultImage").src = 'data:image/jpeg;base64,' + data.image;
     })
     .catch(error => {
       console.error('Error:', error);

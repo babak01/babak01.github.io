@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function() {
       let formData = new FormData();
       formData.append('file', selectedFile);
   
-      fetch('http://3.86.211.150:5000/predict', {
+      fetch('http://54.152.53.122:5000/predict', { // Replace with the Public IPv4 address
         method: 'POST',
         body: formData
       })
@@ -39,5 +39,4 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("An error occurred while submitting the file. Please check the console for details.");
       });
     });
-  });
-  
+});
